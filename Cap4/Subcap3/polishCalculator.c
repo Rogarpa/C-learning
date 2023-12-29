@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>  /* for  atof() */
+#include <math.h>  /* for  sin, exp and pow */
 #define MAXOP   100  /* max size of operand or operator */
 #define NUMBER  '0'  /* signal that a number was found */
 int getop(char []);
@@ -36,6 +37,16 @@ int main()
             case '%':
                 op2 = pop();
                 push((int)pop() % (int)op2);
+                break;
+            case 's':
+                push(sin(pop()));
+                break;
+            case 'x':
+                push(exp(pop()));
+                break;
+            case 'p':
+                op2 = pop();
+                push(pow(pop(), op2));
                 break;
             case '\n':
                 printf("\t%.8g\n", pop());
