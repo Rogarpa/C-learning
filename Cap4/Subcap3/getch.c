@@ -13,3 +13,9 @@ void ungetch(int c)   /* push character back on input */
     else
         buf[bufp++] = c;
 }
+void ungets(char s[]){
+    int i;
+    for(i = 0; s[i] != '\0'; ++i){
+        ungetch(s[i]);
+    }
+}
