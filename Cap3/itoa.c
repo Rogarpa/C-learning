@@ -2,12 +2,11 @@
 #include <string.h>
    void itoa(int n, char s[]);
    void itoaForNegativeLimit(int n, char s[]);
+   void itoaWithPadding(int n, char s[], int padding);
    void reverse(char s[]);
 int main(){
     char s[11];
-    itoa(-2147483648, s);
-    printf("%s", s);
-    itoaForNegativeLimit(-2147483648, s);
+    itoaWithPadding(1, s, 5);
     printf("%s", s);
 }
  /* itoa:  convert n to characters in s */
@@ -40,6 +39,23 @@ int main(){
        s[i] = '\0';
        reverse(s);
    }
+    void itoaWithPadding(int n, char s[], int padding)
+    {
+        int i, sign;
+        
+        sign = n < 0? -1: 1;
+        i = 0;
+        do {      /* generate digits in reverse order */
+            s[i++] = (sign*(n % 10)) + '0';  /* get next digit */
+        } while ((n /= 10) != 0);    /* delete it */
+        if (sign < 0)
+            s[i++] = '-';
+        for(; padding > 0; --padding){
+            s[i++] = '0';
+        }
+        s[i] = '\0';
+        reverse(s);
+    }
    /* reverse:  reverse string s in place */
    void reverse(char s[])
    {
